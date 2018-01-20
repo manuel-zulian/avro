@@ -28,6 +28,8 @@ namespace Avro
     /// </summary>
     public abstract class Schema
     {
+        public LogicalType LogicalType;
+
         /// <summary>
         /// Enum for schema types
         /// </summary>
@@ -68,6 +70,9 @@ namespace Avro
         {
             this.Tag = type;
             this.Props = props;
+
+            if(props != null)
+                LogicalType = LogicalTypes.fromSchema(this);
         }
 
         /// <summary>

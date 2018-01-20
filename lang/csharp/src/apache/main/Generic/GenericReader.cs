@@ -126,6 +126,14 @@ namespace Avro.Generic
                 throw new AvroException("Schema mismatch. Reader: " + readerSchema + ", writer: " + writerSchema);
             }
             */
+
+            if (writerSchema.LogicalType != null)
+            {
+                // Only decimal for now
+                var bytes = Read<byte[]>(writerSchema.Tag, readerSchema, d.ReadBytes);
+                return 10m;
+            }
+
             switch (writerSchema.Tag)
             {
                 case Schema.Type.Null:

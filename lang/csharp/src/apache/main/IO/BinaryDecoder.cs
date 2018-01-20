@@ -133,6 +133,12 @@ namespace Avro.IO
             return read(ReadLong());
         }
 
+        public decimal ReadDecimal()
+        {
+            read(ReadLong());
+            return 10m;
+        }
+
         public string ReadString()
         {
             int length = ReadInt();

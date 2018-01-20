@@ -110,6 +110,15 @@ namespace Avro.Test
             Schema.Parse(s);
         }
 
+        [TestCase("{\"type\":\"bytes\",\"scale\":8,\"precision\":64,\"connect.version\":1,\"connect.parameters\":{\"scale\":\"8\"},\"connect.name\":\"org.apache.kafka.connect.data.Decimal\",\"logicalType\":\"decimal\"}")]
+        public void TestLogicalTypes(string s)
+        {
+            PrimitiveSchema t = (PrimitiveSchema) Schema.Parse(s);
+            Assert.IsTrue(t.LogicalType.Name == "decimal");
+            var dec = (LogicalTypes.Decimal) t.LogicalType;
+            Assert.IsTrue(dec.getScale() == 8);
+        }
+
         [TestCase("null", Schema.Type.Null)]
         [TestCase("boolean", Schema.Type.Boolean)]
         [TestCase("int", Schema.Type.Int)]

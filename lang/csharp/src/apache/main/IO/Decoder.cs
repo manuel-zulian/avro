@@ -67,6 +67,8 @@ namespace Avro.IO
         /// <returns>The bytes just read</returns>
         byte[] ReadBytes();
 
+        decimal ReadDecimal();
+
         /// <summary>
         /// Reads a string Avro type
         /// </summary>

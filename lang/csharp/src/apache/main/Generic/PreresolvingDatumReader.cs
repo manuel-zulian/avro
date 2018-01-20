@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -71,6 +71,11 @@ namespace Avro.Generic
             if (readerSchema.Tag == Schema.Type.Union && writerSchema.Tag != Schema.Type.Union)
             {
                 readerSchema = FindBranch(readerSchema as UnionSchema, writerSchema);
+            }
+            if (writerSchema.LogicalType != null)
+            {
+                // Only decimal for now
+                return Read(d => d.ReadDecimal());
             }
             switch (writerSchema.Tag)
             {

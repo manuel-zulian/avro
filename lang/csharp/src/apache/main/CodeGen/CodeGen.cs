@@ -655,6 +655,12 @@ namespace Avro
         /// <returns></returns>
         internal static string getType(Schema schema, bool nullible, ref bool nullibleEnum)
         {
+            if (schema.LogicalType != null)
+            {
+                return "System.Decimal";
+            }
+
+
             switch (schema.Tag)
             {
                 case Schema.Type.Null:
