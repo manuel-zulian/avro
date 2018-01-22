@@ -75,7 +75,7 @@ namespace Avro
         /// <param name="encspace"></param>
         protected internal override void WriteJson(JsonTextWriter w, SchemaNames names, string encspace)
         {
-            if (false)
+            if (this.LogicalType != null)
             {
                 w.WriteStartObject();
                 w.WritePropertyName("type");
