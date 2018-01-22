@@ -133,10 +133,10 @@ namespace Avro.IO
             return read(ReadLong());
         }
 
-        public decimal ReadDecimal()
+        public decimal ReadDecimal(LogicalTypes.Decimal type)
         {
-            read(ReadLong());
-            return 10m;
+            var bytes = read(ReadLong());
+            return LogicalTypes.Decimal.ConvertToDecimal(bytes, type.scale);
         }
 
         public string ReadString()

@@ -129,9 +129,12 @@ namespace Avro.Generic
 
             if (writerSchema.LogicalType != null)
             {
-                // Only decimal for now
-                var bytes = Read<byte[]>(writerSchema.Tag, readerSchema, d.ReadBytes);
-                return 10m;
+                if (writerSchema.LogicalType is LogicalTypes.Decimal @decimal)
+                {
+                    // Only decimal for now
+                    var bytes = Read<byte[]>(writerSchema.Tag, readerSchema, d.ReadBytes);
+                    return LogicalTypes.Decimal.ConvertToDecimal(bytes, @decimal.scale);
+                }
             }
 
             switch (writerSchema.Tag)

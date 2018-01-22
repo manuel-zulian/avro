@@ -67,7 +67,7 @@ namespace Avro.IO
         /// <returns>The bytes just read</returns>
         byte[] ReadBytes();
 
-        decimal ReadDecimal();
+        decimal ReadDecimal(LogicalTypes.Decimal type);
 
         /// <summary>
         /// Reads a string Avro type

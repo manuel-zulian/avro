@@ -74,8 +74,10 @@ namespace Avro.Generic
             }
             if (writerSchema.LogicalType != null)
             {
-                // Only decimal for now
-                return Read(d => d.ReadDecimal());
+                if (writerSchema.LogicalType is LogicalTypes.Decimal @decimal)
+                {
+                    return Read(d => d.ReadDecimal(@decimal));
+                }
             }
             switch (writerSchema.Tag)
             {

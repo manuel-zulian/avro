@@ -657,7 +657,8 @@ namespace Avro
         {
             if (schema.LogicalType != null)
             {
-                return "System.Decimal";
+                if (nullible) return "System.Nullable<decimal>";
+                else return typeof(decimal).ToString();
             }
 
 

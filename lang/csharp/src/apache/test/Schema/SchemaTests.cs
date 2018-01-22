@@ -116,7 +116,7 @@ namespace Avro.Test
             PrimitiveSchema t = (PrimitiveSchema) Schema.Parse(s);
             Assert.IsTrue(t.LogicalType.Name == "decimal");
             var dec = (LogicalTypes.Decimal) t.LogicalType;
-            Assert.IsTrue(dec.getScale() == 8);
+            Assert.IsTrue(dec.scale == 8);
         }
 
         [TestCase("null", Schema.Type.Null)]

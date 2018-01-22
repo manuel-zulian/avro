@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -15,7 +16,7 @@ namespace Avro
             if (!schema.Props.Keys.Contains(LogicalType.LogicalTypeProp))
                 return null;
 
-            var typeName = JsonConvert.DeserializeObject<string>(schema.Props[LogicalType.LogicalTypeProp]);
+            var typeName = schema.Props[LogicalType.LogicalTypeProp];
 
             LogicalType logicalType;
 
@@ -41,8 +42,8 @@ namespace Avro
             private static readonly string PRECISION_PROP = "precision";
             private static readonly string SCALE_PROP = "scale";
 
-            private readonly int precision;
-            private readonly int scale;
+            public int scale { get; set; }
+            public int precision { get; set; }
 
             private Decimal(int precision, int scale) : base(DECIMAL)
             {
@@ -52,15 +53,15 @@ namespace Avro
 
             public Decimal(Schema schema) : base(DECIMAL)
             {
-                if (!hasProperty(schema, PRECISION_PROP))
+                if (!HasProperty(schema, PRECISION_PROP))
                 {
-                    //throw new Exception(
-                    //    "Invalid decimal: missing precision");
+                    throw new Exception(
+                        "Invalid decimal: missing precision");
                 }
 
-                //this.precision = getInt(schema, PRECISION_PROP);
+                this.precision = getInt(schema, PRECISION_PROP);
 
-                if (hasProperty(schema, SCALE_PROP))
+                if (HasProperty(schema, SCALE_PROP))
                 {
                     this.scale = getInt(schema, SCALE_PROP);
                 }
@@ -70,22 +71,25 @@ namespace Avro
                 }
             }
 
-            public int getPrecision()
+            public static decimal ConvertToDecimal(byte[] bytes, int scale)
             {
-                return precision;
+                var result = 0m;
+                var bn = new BigInteger(bytes);
+                for(var i = bytes.Length - 1; i >=0 ; i--)
+                {
+                    result += (bytes[i]) << ((bytes.Length - 1 - i) * 8);
+                }
+            
+                result = result * (decimal) Math.Pow(10, -scale);
+                return result;
             }
 
-            public int getScale()
-            {
-                return scale;
-            }
-
-            private bool hasProperty(Schema schema, String name)
+            private static bool HasProperty(Schema schema, String name)
             {
                 return (schema.Props.ContainsKey(name));
             }
 
-            private int getInt(Schema schema, String name)
+            private int getInt(Schema schema, string name)
             {
                 var obj = schema.Props[name];
                 return Convert.ToInt32(obj);
