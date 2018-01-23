@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -44,7 +44,7 @@ namespace Avro
                 if (ReservedProps.Contains(prop.Name))
                     continue;
                 if (!ContainsKey(prop.Name))
-                    Add(prop.Name, prop.Value.ToString());
+                    Add(prop.Name, prop.Value.ToString(Formatting.Indented));
             }
         }
 
