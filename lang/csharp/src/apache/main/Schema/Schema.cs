@@ -56,6 +56,11 @@ namespace Avro
         public Type Tag { get; private set; }
 
         /// <summary>
+        /// Logical type property (if present)
+        /// </summary>
+        public LogicalType LogicalType { get; private set; }
+
+        /// <summary>
         /// Additional JSON attributes apart from those defined in the AVRO spec
         /// </summary>
         internal PropertyMap Props { get; private set; }
