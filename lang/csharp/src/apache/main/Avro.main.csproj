@@ -134,6 +134,7 @@
     <Compile Include="Schema\FixedSchema.cs" />
     <Compile Include="Schema\JsonHelper.cs" />
     <Compile Include="Schema\LogicalType.cs" />
+    <Compile Include="Schema\LogicalTypes.cs" />
     <Compile Include="Schema\MapSchema.cs" />
     <Compile Include="Schema\NamedSchema.cs" />
     <Compile Include="Schema\PrimitiveSchema.cs" />
