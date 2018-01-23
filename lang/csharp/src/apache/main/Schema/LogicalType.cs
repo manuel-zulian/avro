@@ -40,15 +40,15 @@ namespace Avro
         /// Get the name of this logical type.
         /// </summary>
         public string Name { get; private set; }
+        
+        public virtual Schema AddToSchema(Schema schema) {
+            //validate(schema);
+            schema.Props.Add(LogicalTypeProp, Name);
+            //schema.setLogicalType(this);
+            return schema;
+        }
 
         // TODO
-//        public Schema addToSchema(Schema schema) {
-//            validate(schema);
-//            schema.addProp(LOGICAL_TYPE_PROP, name);
-//            schema.setLogicalType(this);
-//            return schema;
-//        }
-//
 //        public void validate(Schema schema) {
 //            for (String incompatible : INCOMPATIBLE_PROPS) {
 //                if (schema.getProp(incompatible) != null) {
