@@ -83,7 +83,7 @@ namespace Avro
                 foreach (var keyValuePair in this.Props)
                 {
                     w.WritePropertyName(keyValuePair.Key);
-                    w.WriteValue(keyValuePair.Value);
+                    w.WriteRawValue(keyValuePair.Value);
                 }
                 w.WriteEndObject();
             }

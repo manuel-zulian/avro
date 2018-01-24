@@ -16,7 +16,7 @@ namespace Avro
             if (!schema.Props.Keys.Contains(LogicalType.LogicalTypeProp))
                 return null;
 
-            var typeName = schema.Props[LogicalType.LogicalTypeProp];
+            var typeName = JsonConvert.DeserializeObject<string>(schema.Props[LogicalType.LogicalTypeProp]);
 
             LogicalType logicalType;
 
